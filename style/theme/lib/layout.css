@@ -1,0 +1,18 @@
+.container{ width: 970px; padding: 0 5px; margin: 0 auto; zoom: 1;  overflow: auto;}
+
+@media ( max-width: 992px ) {
+    .container{ width: 740px; }
+    .list,.content-box{ width: 740px !important; float: none !important;}
+    .side{ display: none !important;}
+    .header,.footer,.copyright,.banner{ min-width: 750px;}
+}
+@media ( min-width:992px ) and ( max-width: 1200px ) {
+    .container{ width: 970px; }
+    .list,.content-box{ width: 700px !important;}
+}
+@media ( min-width:1200px ) {
+    .container{ width: 1110px; }
+    .list,.content-box{ width: 840px;}
+}
+.pull-left{ float: left;}
+.pull-right{ float: right;}
