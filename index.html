@@ -3,16 +3,25 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>萍萍记录</title>
+    <title>blog</title>
 
-    <link rel="stylesheet" href="style/theme/lib/layout.css"/>
-    <link rel="stylesheet" href="style/theme/lib/style.css"/>
     <link rel="stylesheet" href="style/framework.css"/>
+    <script type="text/javascript" src="src/lib/sea.js"></script>
     <script type="text/javascript" src="src/lib/jquery-1.7.2.js"></script>
-    <script type="text/javascript" src="src/index.js"></script>
-
   </head>
 
+  <script type="text/javascript">
+      // Set configuration
+      seajs.config({
+        base: "./src/",
+        alias: {
+          "jquery": "lib/jquery-1.7.2.js"
+        }
+      });
+
+      seajs.use("index");
+
+  </script>
   <body>
 
   </body>

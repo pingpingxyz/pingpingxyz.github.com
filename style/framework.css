@@ -2,3 +2,107 @@
 	margin: 0; 
 	padding: 0;
 }
+
+::selection {
+	background-color: red;
+	color: #fff;
+}
+
+body {
+	background: url('images/bg_body.gif') left top;
+}
+
+
+.banner, 
+.header, 
+.body, 
+.footer {
+	width: 100%; 
+}
+
+.banner, 
+.body, 
+.footer {
+	position: relative;
+}
+
+.banner {
+	height: 170px;
+	position: relative;
+	z-index: 10; 
+	border: 1px solid #ccc; 
+	background: url('images/header.gif') right top no-repeat;
+}
+
+.sub_banner {
+	height: 170px;
+	background: url('images/bg_title.gif') 170px 40px no-repeat;
+}
+
+.header {
+	position: absolute;
+	height: 42px;
+	top : 0;
+	z-index: 20; 
+	border: 1px solid #ccc; 
+	background-color: #FAD4E1;
+	opacity: 0.5;
+	line-height: 42px;
+}
+
+.footer {
+	height: 40px;
+	border: 1px solid #ccc; 
+	background: url('images/bg_left.gif') top left repeat-x; 
+}
+
+
+.container {
+	width: 1110px;
+	margin: 0 auto; 
+	overflow: auto;
+	position: relative;
+}
+
+.list {
+	width: 840px;
+	float : left;
+	height: 1000px; 
+	border: 1px solid #ccc; 
+}
+
+.side {
+	width: 250px;
+	float: right; 
+	height: 300px; 
+	border: 1px solid #ccc; 
+}
+
+
+.iconfont a {
+	font-family: cursive;
+	float: left; 
+}
+
+.header .nav {
+	float: right;
+	right: 130px;
+	position: absolute;
+}
+
+a:hover {
+	color: #ffa500; 
+	transition: all 0.6s ease; 
+	--webkit-animation: all 0.6s ease;
+}
+
+a {
+	outline: none; 
+	text-decoration: none;
+}
+
+.nav li {
+	float : left;
+	list-style-type : none;
+	padding: 0 10px;
+}
