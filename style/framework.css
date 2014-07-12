@@ -45,9 +45,11 @@ body {
 	top : 0;
 	z-index: 20; 
 	border: 1px solid #ccc; 
-	background-color: #FAD4E1;
+	background-color: #FF6599;
 	opacity: 0.5;
 	line-height: 42px;
+	font-family: "microsoft yahei", Monaco, Menlo, Consolas, "Courier New", monospace;
+	color: #fff; 
 }
 
 .footer {
@@ -80,8 +82,8 @@ body {
 
 
 .iconfont a {
-	font-family: cursive;
 	float: left; 
+	font-size: 20px;
 }
 
 .header .nav {
@@ -91,12 +93,12 @@ body {
 }
 
 a:hover {
-	color: #ffa500; 
 	transition: all 0.6s ease; 
-	--webkit-animation: all 0.6s ease;
+	-webkit-animation: all 0.6s ease;
 }
 
 a {
+	color: #fff;
 	outline: none; 
 	text-decoration: none;
 }
@@ -105,4 +107,17 @@ a {
 	float : left;
 	list-style-type : none;
 	padding: 0 10px;
+	height: 30px;
+	line-height: 30px;
+	top : 5px;
+	font-size: 14px;
+	position: relative;
+	cursor: pointer;
+}
+
+
+.nav li.current_page_item { 
+	border-radius: 18px;
+	background-color: #ED3577;
+	color: #fff;
 }

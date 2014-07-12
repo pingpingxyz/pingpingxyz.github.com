@@ -1,7 +1,10 @@
 
 define(function(require, exports, module) {
 
-	
+
+	var header = require('./header'), 
+		body = require('./body');
+
 	// class dashboard
 	function dashboard(options) {
 		this.ct = options.container; 
@@ -30,22 +33,17 @@ define(function(require, exports, module) {
 			this.headerEl = this.el.find('.header'); 
 
 			this.renderBody(); 
-
 			this.renderHeader(); 
 		}, 
 
 		renderBody : function() {
-			var body = require('./body'); 
-
-			var body = this.body = new body({
+			this.body = new body({
 				container : this.bodyEl
 			}); 
 		}, 
 
 		renderHeader : function() {
-			var header = require('./header'); 
-
-			var header = this.header = new header({
+			this.header = new header({
 				container : this.headerEl
 			})
 		}
