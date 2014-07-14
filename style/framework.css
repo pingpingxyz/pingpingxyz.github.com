@@ -30,7 +30,6 @@ body {
 	height: 170px;
 	position: relative;
 	z-index: 10; 
-	border: 1px solid #ccc; 
 	background: url('images/header.gif') right top no-repeat;
 }
 
@@ -44,7 +43,6 @@ body {
 	height: 42px;
 	top : 0;
 	z-index: 20; 
-	border: 1px solid #ccc; 
 	background-color: #FF6599;
 	opacity: 0.5;
 	line-height: 42px;
@@ -54,30 +52,27 @@ body {
 
 .footer {
 	height: 40px;
-	border: 1px solid #ccc; 
 	background: url('images/bg_left.gif') top left repeat-x; 
 }
 
 
 .container {
-	width: 1110px;
+	width: 1129px;
 	margin: 0 auto; 
 	overflow: auto;
 	position: relative;
 }
 
 .list {
-	width: 840px;
+	width: 864px;
 	float : left;
 	height: 1000px; 
-	border: 1px solid #ccc; 
 }
 
 .side {
 	width: 250px;
 	float: right; 
 	height: 300px; 
-	border: 1px solid #ccc; 
 }
 
 
@@ -121,3 +116,18 @@ a {
 	background-color: #ED3577;
 	color: #fff;
 }
+
+.list {
+	background: #FEFEF2 url('images/bg_left.gif') top left repeat-x; 
+}
+
+.list-navigator {
+	width: 95%;
+	height: 40px;
+	background: url('images/line.gif') left bottom repeat-x; 
+	margin:auto;
+	margin-bottom: 20px;
+	position: relative;
+	top : 19px;
+}
+
