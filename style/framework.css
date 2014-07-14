@@ -4,7 +4,7 @@
 }
 
 ::selection {
-	background-color: red;
+	background-color: #1da3e1;
 	color: #fff;
 }
 
@@ -66,7 +66,6 @@ body {
 .list {
 	width: 864px;
 	float : left;
-	height: 1000px; 
 }
 
 .side {
@@ -131,3 +130,71 @@ a {
 	top : 19px;
 }
 
+
+.article-item {
+	position: relative;
+	height: 202px;
+	border: 1px #e0e0e0; 
+	background-color: #FFECEC; 
+	width: 90%; 
+	margin: 0 auto; 
+	margin-top : 25px;
+	margin-bottom: 25px;
+	padding: 20px;
+}
+
+.article-item h2 {
+	line-height: 24px;
+	height: 24px;
+	display: block;
+	font-size: 18px;
+}
+
+.article-item .label {
+	display: inline-block;
+	height: 24px;
+	line-height: 24px;
+	position: relative;
+	color: #fff;
+	margin-right: 10px;
+	font-family: simsun;
+	border-radius: 4px;
+	background-color: #e95454;
+	border-radius: 4px;
+	font-size: 12px;
+	padding: 0 5px;
+	top: -2px;
+}
+
+.article-item .title {
+	color : #0A0303;
+}
+
+.article-item .label-arrow {
+	top: 7px;
+	right: -5px;
+	border-left: 5px solid #e95454; 
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent; 
+	position: absolute;
+	width: 0; 
+	height: 0;
+}
+
+.intro_img {
+	width: 200px;
+	height: 150px;
+	position: absolute;
+	left: 0;
+	top: 50%;
+	margin-top: -75px;
+}
+
+.article-item .intro {
+	color : #858585;
+	font-size: 13px;
+	min-height: 170px;
+	position: relative;
+	padding : 10px 0 0 220px;
+	line-height: 24px;
+}
