@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>blog</title>
-
+    <script type="text/javascript" src="src/lib/xdomain.js" slave="http://regexp-lin.github.io/proxy.html"></script>
     <link rel="stylesheet" href="style/framework.css"/>
     <script type="text/javascript" src="src/lib/sea.js"></script>
     <script type="text/javascript" src="src/lib/jquery-1.7.2.js"></script>
@@ -21,6 +21,22 @@
 
       seajs.use("index");
 
+      $(function() {
+          console.log('jquery start'); 
+
+          // var xhr = new XMLHttpRequest();
+          // xhr.open('GET', 'http://regexp-lin.github.io/src/index.js');
+          // xhr.onreadystatechange = function(e) {
+          //   if(xhr.readyState === 4)
+          //     alert(xhr.responseText);
+          // };
+          // xhr.send();
+
+          //or if we are using jQuery...
+          $.get('http://regexp-lin.github.io/src/index.js').done(function(data) {
+            console.log("got result: ", data);
+          });
+      })
   </script>
   <body>
 
