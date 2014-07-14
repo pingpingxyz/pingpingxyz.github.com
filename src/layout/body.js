@@ -1,6 +1,7 @@
 define(function(require, exports, module) {
 
-	var sideBar = require('./sideBar');
+	var sideBar = require('./sideBar'),
+		list = require('./list'); 
 
 	function body(options) {
 		this.ct = options.container;
@@ -20,8 +21,10 @@ define(function(require, exports, module) {
 			this.el = $(tpl).appendTo(ct);
 
 			this.sideEl = this.el.find('.side');
+			this.listEl = this.el.find('.list');
 
 			this.renderSideBar();
+			this.renderList();
 
 		},
 
@@ -29,6 +32,12 @@ define(function(require, exports, module) {
 
 			this.sideBar = new sideBar({
 				container: this.sideEl
+			})
+		}, 
+
+		renderList : function() {
+			this.list = new list({
+				container: this.listEl
 			})
 		}
 	}
