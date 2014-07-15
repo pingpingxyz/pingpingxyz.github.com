@@ -40,7 +40,7 @@ define(function(require, exports, module) {
 
 					'<div class="clock-wrap">',
 						'<object height="180" width="180" align="center" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0">',
-				            '<object type="application/x-shockwave-flash" data="./style/clock.swf" style="width:250px; height:250px;opacity:0.5;">',
+				            '<object type="application/x-shockwave-flash" data="./style/clock.swf" style="width:250px; height:250px;opacity:0.7;">',
 				        '</object>',
 					'</div>',
 
