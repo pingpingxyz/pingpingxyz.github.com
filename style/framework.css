@@ -72,6 +72,8 @@ body {
 	width: 250px;
 	float: right; 
 	height: 300px; 
+	position: relative;
+	top: 64px;
 }
 
 
@@ -198,3 +200,142 @@ a {
 	padding : 10px 0 0 220px;
 	line-height: 24px;
 }
+
+
+.side .block {
+	overflow: hidden;
+	margin-bottom: 20px;
+}
+
+.block .title {
+	height: 27px;
+	font-size: 16px;
+	color: #e95454;
+	text-align: center;
+	line-height: 27px;
+	border: 1px solid #e0e0e0;
+	background-color: #f9f9f9;
+	padding: 6px 50px 6px 0;
+	position: relative;
+}
+
+.block .title label {
+	display: block;
+	width: 49px;
+	border-left: 1px solid #e6e6e6;
+	cursor: pointer;
+	text-align: center;
+	position: absolute;
+	right: 0;
+	top: 6px;
+	line-height: 24px;
+}
+
+.block .title label i {
+	border-style: solid dotted dotted dotted;
+	border-color: #e95454 transparent transparent transparent;
+}
+
+.block .title label b {
+	border-style: dotted dotted solid dotted;
+	border-color: transparent transparent #e95454 transparent;
+}
+
+
+.block ul {
+	background-color: #EEEEEE;
+}
+
+
+.block li {
+	vertical-align: top;
+	margin-top: -1px;
+	border-left: 1px solid #e0e0e0;
+	border-right: 1px solid #e0e0e0;
+	border-top: 1px solid #f3f3f3;
+	border-bottom: 1px solid #e0e0e0;
+	height: 39px;
+	overflow: hidden;
+}
+
+.category li a {
+	display: block;
+	padding-left: 70px;
+	color: #924E4E;
+	font-size: 14px;
+	text-decoration: none;
+	line-height: 39px;
+}
+
+.block .title label i, .block .title label b {
+	width: 0;
+	line-height: 0;
+	font-size: 0;
+	height: 0;
+	overflow: hidden;
+	border-width: 8px;
+}
+
+label b {
+	display: none;
+}
+
+.tags {
+	padding: 5px;
+	border: 1px solid #e0e0e0;
+	border-top: none;
+	background-color: #EEEEEE;
+}
+
+.tags a {
+	font-size: 12px;
+	color: #924E4E;
+	background-color: #ededed;
+	padding: 2px 8px;
+	margin-left: 5px;
+	border-radius: 12px;
+	text-decoration: none;
+	white-space: nowrap;
+	margin-bottom: 5px;
+	display: inline-block;
+}
+
+
+.kalendae {
+	margin : 0;
+}
+
+.kalendae .k-calendar {
+	width: 229px;
+}
+
+.kalendae .k-title, 
+.kalendae .k-header, 
+.kalendae .k-days {
+	width: 229px;
+}
+
+.kalendae .k-days span {
+	width: 23px;
+	text-align: center;
+}
+
+.kalendae .k-header span {
+	width: 24px;
+	padding: 1px 3px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
