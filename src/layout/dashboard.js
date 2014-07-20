@@ -3,7 +3,8 @@ define(function(require, exports, module) {
 
 
 	var header = require('./header'), 
-		body = require('./body');
+		body = require('./body'), 
+		musicPlayer = require('./musicPlayer'); 
 
 	// class dashboard
 	function dashboard(options) {
@@ -24,6 +25,7 @@ define(function(require, exports, module) {
 					'<div class="header"></div>', 
 					'<div class="body"></div>', 
 					'<div class="footer"></div>',
+					'<div class="music_qq"></div>',
 				'</div>', 
 			].join(''); 
 
@@ -31,9 +33,11 @@ define(function(require, exports, module) {
 
 			this.bodyEl = this.el.find('.body'); 
 			this.headerEl = this.el.find('.header'); 
+			this.musicEl = this.el.find('.music_qq');
 
 			this.renderBody(); 
 			this.renderHeader(); 
+			this.renderMusicPlayer();
 		}, 
 
 		renderBody : function() {
@@ -45,6 +49,12 @@ define(function(require, exports, module) {
 		renderHeader : function() {
 			this.header = new header({
 				container : this.headerEl
+			})
+		}, 
+
+		renderMusicPlayer : function() {
+			this.musicPlayer = new musicPlayer({
+				container : this.musicEl
 			})
 		}
 	}
