@@ -105,8 +105,9 @@ define(function(require, exports, module) {
 						        '<a href="javascript:;" class="close_tips"></a>',
 						    '</div>',
 						    '<audio class="audio_td">', 
-						    	'<source src=""'
-						    '</audio>'
+						    	'<source src="./music/tang.mp3" type="audio/ogg">',
+						    	'<source src="./music/tang.mp3" type="audio/mpeg">',
+						    '</audio>',
 						'</div>'
 			].join('');
 
