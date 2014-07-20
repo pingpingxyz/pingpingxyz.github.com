@@ -104,7 +104,7 @@ define(function(require, exports, module) {
 							'<div class="single_radio_tip" id="single_radio_tip" style="display:none;">',
 						        '<a href="javascript:;" class="close_tips"></a>',
 						    '</div>',
-						    '<audio class="audio_td">', 
+						    '<audio class="audio_td" autoplay="autoplay">', 
 						    	'<source src="./music/tang.mp3" type="audio/ogg">',
 						    	'<source src="./music/tang.mp3" type="audio/mpeg">',
 						    '</audio>',
