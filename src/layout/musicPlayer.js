@@ -58,13 +58,13 @@ define(function(require, exports, module) {
 		}, 
 
 		getSongList : function() {
-			$.ajax({
-				url : 'https://api.github.com/repos/pingpingxyz/pingpingxyz.github.com/contents/music', 
-				dataType : 'json', 
-				success : function(data) {
-					console.log(data);
-				}
-			})
+			// $.ajax({
+			// 	url : 'https://api.github.com/repos/pingpingxyz/pingpingxyz.github.com/contents/music', 
+			// 	dataType : 'json', 
+			// 	success : function(data) {
+			// 		console.log(data);
+			// 	}
+			// })
 
 			$.ajax({  
 		        type : "get",  
@@ -76,6 +76,10 @@ define(function(require, exports, module) {
 		        	console.log(data);
 		        }
 		    });  
+
+		    window.showList = function(data) {
+		    	console.log(data); 
+		    }
 		}, 
 
 
