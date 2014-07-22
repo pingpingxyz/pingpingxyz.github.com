@@ -65,6 +65,17 @@ define(function(require, exports, module) {
 					console.log(data);
 				}
 			})
+
+			$.ajax({  
+		        type : "get",  
+		        async: true,  
+		        url : "https://api.github.com/repos/pingpingxyz/pingpingxyz.github.com/contents/music?callback=showList",  
+		        dataType : "jsonp",//数据类型为jsonp  
+		        jsonp: "showList",//服务端用于接收callback调用的function名的参数  
+		        success : function(data){  
+		        	console.log(data);
+		        }
+		    });  
 		}, 
 
 
