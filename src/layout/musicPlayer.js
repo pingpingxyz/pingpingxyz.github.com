@@ -75,6 +75,7 @@ define(function(require, exports, module) {
 		}, 
 
 		initMusicCallback : function() {
+			window.music = {}; 
 			window.music.getSongList = function(data) {
 		    	console.log(data); 
 		    }
