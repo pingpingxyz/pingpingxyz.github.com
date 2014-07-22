@@ -28,6 +28,8 @@ define(function(require, exports, module) {
 		init : function() {
 			this.playerEl.css('left', -541);
 			this.bindEvents();
+
+			this.getSongList();
 		}, 
 
 		bindEvents : function() {
@@ -52,10 +54,19 @@ define(function(require, exports, module) {
 					}, 1000)
 
 				}
-				
 			})
-
 		}, 
+
+		getSongList : function() {
+			$.ajax({
+				url : 'https://api.github.com/repos/pingpingxyz/pingpingxyz.github.com/contents/music', 
+				dataType : 'json', 
+				success : function(data) {
+					console.log(data);
+				}
+			})
+		}, 
+
 
 		getMusicPlayerTmpl : function() {
 			return [
@@ -153,7 +164,7 @@ define(function(require, exports, module) {
 							'<div class="single_radio_tip" id="single_radio_tip" style="display:none;">',
 						        '<a href="javascript:;" class="close_tips"></a>',
 						    '</div>',
-						    '<audio class="audio_td" autoplay="autoplay" src="./music/tang.mp3">', 
+						    '<audio class="audio_td" autoplay="autoplay" src="./music/谭咏麟-再见也是泪.mp3">', 
 						    '</audio>',
 						'</div>'
 			].join('');
