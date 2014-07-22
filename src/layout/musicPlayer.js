@@ -6,13 +6,62 @@ define(function(require, exports, module) {
 	}
 
 	musicPlayer.prototype = {
+
 		render: function() {
 			var ct = this.ct;
 
-			var tpl = [
+			var tpl = this.getMusicPlayerTmpl();
+
+			this.el = $(tpl).appendTo(ct);
+
+			this.playerEl = this.el;
+
+			this.foldBtn = this.el.find('.folded_bt'); 
+
+			this.audioEl = this.el.find('.audio_td'); 
+			
+			this.init();
+
+			window.pp = this;
+		},
+
+		init : function() {
+			this.playerEl.css('left', -541);
+			this.bindEvents();
+		}, 
+
+		bindEvents : function() {
+			var self = this; 
+
+			this.foldBtn.bind('click', function(e) {
+
+				var etar = $(e.target); 
+
+				if (etar.hasClass('fold')) {
+					etar.removeClass('fold'); 
+					etar.addClass('unfold'); 
+					self.playerEl.animate({
+						left : 1
+					}, 1000)
+
+				} else if (etar.hasClass('unfold')) {
+					etar.removeClass('unfold'); 
+					etar.addClass('fold'); 
+					self.playerEl.animate({
+						left : -541
+					}, 1000)
+
+				}
+				
+			})
+
+		}, 
+
+		getMusicPlayerTmpl : function() {
+			return [
 						'<div class="m_player mini_version" id="divplayer" role="application" style="left: 0px;">',
 							'<div class="m_player_dock" id="divsongframe">',
-								'<div class="music_info" id="divsonginfo"><a target="contentFrame" class="album_pic" title=""><img src="http://imgcache.qq.com/mediastyle/y/img/cover_mine_130.jpg" alt="" ></a><div class="music_info_main"><p class="music_name" title="音乐你的生活"><span>音乐你的生活</span><a onclick="g_topPlayer.singleFm.open();" href="javascript:;" class="icon_radio">电台</a></p><p class="singer_name" title="音乐">音乐</p><p class="play_date" id="ptime"></p><p class="music_op" style="display:none;"><strong class="btn_like_n" title="暂不提供此歌曲服务" onclick="MUSIC.event.cancelBubble();" name="myfav_" mid=""><span>我喜欢</span></strong><strong class="btn_share_n" title="暂不提供此歌曲服务" onclick="MUSIC.event.cancelBubble();"><span>分享</span></strong></p></div></div>',
+								'<div class="music_info" id="divsonginfo"><a target="contentFrame" class="album_pic" title=""><img src="./style/images/cover_mine_130.jpg" alt="" ></a><div class="music_info_main"><p class="music_name" title="音乐你的生活"><span>音乐你的生活</span></p><p class="singer_name" title="音乐">音乐</p><p class="play_date" id="ptime"></p><p class="music_op" style="display:none;"><strong class="btn_like_n" title="暂不提供此歌曲服务" onclick="MUSIC.event.cancelBubble();" name="myfav_" mid=""><span>我喜欢</span></strong><strong class="btn_share_n" title="暂不提供此歌曲服务" onclick="MUSIC.event.cancelBubble();"><span>分享</span></strong></p></div></div>',
 								'<div class="bar_op">',
 									'<strong title="上一首( [ )" class="prev_bt" onclick="g_topPlayer.prev();"><span>上一首</span></strong>',
 									'<strong title="播放(P)" class="play_bt" id="btnplay" onclick="g_topPlayer.play();"><span>播放</span></strong>',
@@ -41,7 +90,7 @@ define(function(require, exports, module) {
 							'<span class="active_tip" id="spanaddtips" style="top:0px;display:none;"></span>',
 							'<span title="展开播放列表" class="open_list" id="spansongnum1" style="display: block;"><span>0</span></span>',
 							'<span title="显示歌词(L)" class="btn_lyrics_disabled" id="btnlrc">歌词(L)</span>',
-							'<button type="button" class="folded_bt" title="点击收起" id="btnfold"><span>点击收起/展开</span></button>',
+							'<button type="button" class="folded_bt fold" title="点击收起" id="btnfold"><span>点击收起/展开</span></button>',
 							
 							'<div class="play_list_frame" id="divplayframe" style="display: none; opacity: 1; -webkit-transition: all; transition: all;">',
 								'<div class="play_list_title">',
@@ -104,18 +153,12 @@ define(function(require, exports, module) {
 							'<div class="single_radio_tip" id="single_radio_tip" style="display:none;">',
 						        '<a href="javascript:;" class="close_tips"></a>',
 						    '</div>',
-						    '<audio class="audio_td" autoplay="autoplay">', 
-						    	'<source src="./music/tang.mp3" type="audio/ogg">',
-						    	'<source src="./music/tang.mp3" type="audio/mpeg">',
+						    '<audio class="audio_td" autoplay="autoplay" src="./music/tang.mp3">', 
 						    '</audio>',
 						'</div>'
 			].join('');
-
-			this.el = $(tpl).appendTo(ct);
-
 		}
 	}
 
 	module.exports = musicPlayer;
-
 })
