@@ -29,6 +29,7 @@ define(function(require, exports, module) {
 			this.playerEl.css('left', -541);
 			this.bindEvents();
 
+			this.initMusicCallback();
 			this.getSongList();
 		}, 
 
