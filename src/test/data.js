@@ -1,3 +1,17 @@
+
+{
+  "message": "This API returns blobs up to 1 MB in size. 
+  The requested blob is too large to fetch via the API, 
+  but you can use the Git Data API to request blobs up to 100 MB in size.",
+  "documentation_url": "https://developer.github.com/v3/repos/contents/#get-contents",
+  "errors": [
+    {
+      "resource": "Blob",
+      "field": "data",
+      "code": "too_large"
+    }
+  ]
+}
 {
 	"meta": {
 		"X-RateLimit-Limit": "60",

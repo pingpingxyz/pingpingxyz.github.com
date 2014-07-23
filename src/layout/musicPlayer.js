@@ -135,7 +135,7 @@ define(function(require, exports, module) {
 
 			// console.log(JSON.stringify(this.songList)); 
 			// console.log(JSON.stringify(this.song)); 
-			this.autoplay();
+			// this.autoplay();
 
 			this.addPlayList();
 		}, 
@@ -285,7 +285,7 @@ define(function(require, exports, module) {
 							'<div class="single_radio_tip" id="single_radio_tip" style="display:none;">',
 						        '<a href="javascript:;" class="close_tips"></a>',
 						    '</div>',
-						    '<audio class="audio_td" autoplay="autoplay" >', 
+						    '<audio class="audio_td" autoplay="autoplay" src="./music/曲婉婷-Anxiety.mp3">', 
 						    '</audio>',
 						'</div>'
 			].join('');
