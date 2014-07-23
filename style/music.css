@@ -239,6 +239,22 @@ to{opacity:.5}}
 }
 
 
+.play_list_point {
+	display: none !important;
+}
+
+.play_list_main {
+	display: block !important;
+}
+
+.play_item {
+	font-size: 12px;
+}
+
+.single_list ul {
+	height : 338px;
+	overflow-y : scroll;
+}
 
 
 

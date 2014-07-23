@@ -17,12 +17,20 @@ define(function(require, exports, module) {
 			this.playerEl = this.el;
 
 			this.foldBtn = this.el.find('.folded_bt'); 
-
 			this.audioEl = this.el.find('.audio_td'); 
-			
-			this.init();
 
-			window.pp = this;
+			this.audioPlayer = this.audioEl[0];
+			
+			this.showSongListBtn = this.el.find('.open_list'); 
+			this.playBtn = this.el.find('.play_bt'); 
+			this.playPreBtn = this.el.find('.prev_bt');
+			this.playNextBtn = this.el.find('.next_bt'); 
+
+			this.playListEl = this.el.find('.play_list_frame'); 
+			
+			this.singleListEl = this.el.find('.single_list>ul'); 
+
+			this.init();
 		},
 
 		init : function() {
@@ -55,7 +63,28 @@ define(function(require, exports, module) {
 					}, 1000)
 
 				}
+			}); 
+
+			this.showSongListBtn.bind('click', function() {
+				if (self.playListEl.is(':visible')) {
+					self.playListEl.hide(); 
+				} else {
+					self.playListEl.show();
+				}
 			})
+
+			this.playBtn.bind('click', function() {
+				console.log('play');
+			})
+
+			this.playPreBtn.bind('click', function() {
+				self.playPreSong(); 
+			})
+
+			this.playNextBtn.bind('click', function() {
+				self.playNextSong();
+			})
+
 		}, 
 
 		getSongList : function() {
@@ -70,17 +99,95 @@ define(function(require, exports, module) {
 		        	console.log(data);
 		        }
 		    });  
-
 		    
 		}, 
 
 		initMusicCallback : function() {
+			var self = this; 
+
 			window.music = {}; 
 			window.music.getSongList = function(data) {
-		    	console.log(data); 
+		    	// console.log(JSON.stringify(data)); 
+		    	self.parseSongList(data.data);
 		    }
 		}, 
 
+		parseSongList : function(songArr) {
+			this.songList = []; 
+			this.song = {}; 
+
+			var song_item; 
+			for (var i = 0; i < songArr.length; ++i) {
+				song_item = songArr[i]; 
+				var name = song_item.name; 
+
+				var author = name.split('-')[0], 
+					songName = name.split('-')[1].split('.')[0]; 
+
+				var o = {
+					author : author, 
+					name : songName.replace(/\_/g, ' '), 
+					key : name
+				}; 
+				this.songList.push(o); 
+				this.song[name] = o;
+			}
+
+			// console.log(JSON.stringify(this.songList)); 
+			// console.log(JSON.stringify(this.song)); 
+			this.autoplay();
+
+			this.addPlayList();
+		}, 
+
+		autoplay : function() {
+			this.currentSongIndex = 0; 
+			this.playSongByCurrentIndex(); 
+		}, 
+
+		playSongByKey : function(key) {
+			this.audioPlayer.src = './music/' + key;
+		},
+
+		getSongKeyByIndex : function(index) {
+			return this.songList[index].key;
+		}, 
+
+		playSongByCurrentIndex : function() {
+			var index = this.currentSongIndex; 
+			var key = this.getSongKeyByIndex(index); 
+			return this.playSongByKey(key); 
+		}, 
+
+		playNextSong : function() {
+			var len = this.songList.length; 
+			this.currentSongIndex = (this.currentSongIndex + 1) % len; 
+			this.playSongByCurrentIndex(); 
+		}, 
+
+		playPreSong : function() {
+			var len = this.songList.length; 
+			this.currentSongIndex = (this.currentSongIndex - 1 < 0 ? this.currentSongIndex + 19 : this.currentSongIndex - 1) % len; 
+			this.playSongByCurrentIndex(); 
+		}, 
+		
+		getSongItemTmpl : function(name, author, key) {
+			return String.format('<li class="play_item {2}"><strong class="music_name" title="{0}">{0}</strong><strong class="singer_name" title="{1}">{1}</strong><strong class="play_time"></strong><div class="list_cp"><span class="data"></span><strong class="btn_like" title="喜欢" name="myfav_001Wt8jA3jSXyi" mid="001Wt8jA3jSXyi"><span>我喜欢</span></strong><strong class="btn_share" title="分享"><span>分享</span></strong><strong class="btn_fav" title="收藏到歌单"><span>收藏</span></strong><strong class="btn_del" title="从列表中删除"><span>删除</span></strong></div></li>', name, author, key); 
+		}, 
+
+		addPlayList : function() {
+			var singleListEl = this.singleListEl;
+
+			var songList = this.songList, 
+				singleTmpl = '',
+				song_item; 
+			for (var i = 0; i < songList.length; ++i) {
+				song_item = songList[i]; 
+				singleTmpl = this.getSongItemTmpl(song_item.name, song_item.author, song_item.key);
+
+				singleListEl.append(singleTmpl); 
+			}
+		}, 
 
 		getMusicPlayerTmpl : function() {
 			return [
@@ -88,9 +195,9 @@ define(function(require, exports, module) {
 							'<div class="m_player_dock" id="divsongframe">',
 								'<div class="music_info" id="divsonginfo"><a target="contentFrame" class="album_pic" title=""><img src="./style/images/cover_mine_130.jpg" alt="" ></a><div class="music_info_main"><p class="music_name" title="音乐你的生活"><span>音乐你的生活</span></p><p class="singer_name" title="音乐">音乐</p><p class="play_date" id="ptime"></p><p class="music_op" style="display:none;"><strong class="btn_like_n" title="暂不提供此歌曲服务" onclick="MUSIC.event.cancelBubble();" name="myfav_" mid=""><span>我喜欢</span></strong><strong class="btn_share_n" title="暂不提供此歌曲服务" onclick="MUSIC.event.cancelBubble();"><span>分享</span></strong></p></div></div>',
 								'<div class="bar_op">',
-									'<strong title="上一首( [ )" class="prev_bt" onclick="g_topPlayer.prev();"><span>上一首</span></strong>',
+									'<strong title="上一首( [ )" class="prev_bt" ><span>上一首</span></strong>',
 									'<strong title="播放(P)" class="play_bt" id="btnplay" onclick="g_topPlayer.play();"><span>播放</span></strong>',
-									'<strong title="下一首( ] )" class="next_bt" onclick="g_topPlayer.next();"><span>下一首</span></strong>',
+									'<strong title="下一首( ] )" class="next_bt" ><span>下一首</span></strong>',
 									'<strong title="随机播放" class="unordered_bt" id="btnPlayway" onclick="g_topPlayer.setPlayWay();"><span>随机播放</span></strong>',
 									'<p class="volume" title="音量调节">',
 										'<span class="volume_icon" id="spanmute" title="点击设为静音(M)"></span>',
@@ -178,7 +285,7 @@ define(function(require, exports, module) {
 							'<div class="single_radio_tip" id="single_radio_tip" style="display:none;">',
 						        '<a href="javascript:;" class="close_tips"></a>',
 						    '</div>',
-						    '<audio class="audio_td" autoplay="autoplay" src="./music/谭咏麟-再见也是泪.mp3">', 
+						    '<audio class="audio_td" autoplay="autoplay" >', 
 						    '</audio>',
 						'</div>'
 			].join('');
