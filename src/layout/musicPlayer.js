@@ -31,6 +31,8 @@ define(function(require, exports, module) {
 			this.singleListEl = this.el.find('.single_list>ul'); 
 
 			this.init();
+
+			window.pp = this;
 		},
 
 		init : function() {
@@ -85,6 +87,18 @@ define(function(require, exports, module) {
 				self.playNextSong();
 			})
 
+			this.singleListEl.bind('click', function(e) {
+				console.log('click item'); 
+				var etar = $(e.target); 
+				var liItem = etar.closest('.play_item'); 
+
+				var index = liItem.attr('index');
+
+				if ( index ) {
+					self.playSongByIndex(index);
+				}
+			})
+
 		}, 
 
 		getSongList : function() {
@@ -107,7 +121,6 @@ define(function(require, exports, module) {
 
 			window.music = {}; 
 			window.music.getSongList = function(data) {
-		    	// console.log(JSON.stringify(data)); 
 		    	self.parseSongList(data.data);
 		    }
 		}, 
@@ -135,10 +148,17 @@ define(function(require, exports, module) {
 
 			// console.log(JSON.stringify(this.songList)); 
 			// console.log(JSON.stringify(this.song)); 
-			this.autoplay();
-
 			this.addPlayList();
+			this.autoplay();
 		}, 
+
+		getSongNameByKey : function(key) {
+			return key.split('-')[1].split('.')[0]; 
+		}, 
+
+		removeExtNameByKey : function(key) {
+			return key.split('.')[0]; 
+		},
 
 		autoplay : function() {
 			this.currentSongIndex = 0; 
@@ -146,6 +166,10 @@ define(function(require, exports, module) {
 		}, 
 
 		playSongByKey : function(key) {
+
+			var singleListEl = this.singleListEl; 
+			singleListEl.find('.play_item').removeClass('play_current'); 
+			singleListEl.find('.play_item.' + this.removeExtNameByKey(key)).addClass('play_current');
 			this.audioPlayer.src = './music/' + key;
 		},
 
@@ -155,6 +179,11 @@ define(function(require, exports, module) {
 
 		playSongByCurrentIndex : function() {
 			var index = this.currentSongIndex; 
+			this.playSongByIndex(index);
+		}, 
+
+		playSongByIndex : function(index) {
+			this.currentSongIndex = index;
 			var key = this.getSongKeyByIndex(index); 
 			return this.playSongByKey(key); 
 		}, 
@@ -171,8 +200,8 @@ define(function(require, exports, module) {
 			this.playSongByCurrentIndex(); 
 		}, 
 		
-		getSongItemTmpl : function(name, author, key) {
-			return String.format('<li class="play_item {2}"><strong class="music_name" title="{0}">{0}</strong><strong class="singer_name" title="{1}">{1}</strong><strong class="play_time"></strong><div class="list_cp"><span class="data"></span><strong class="btn_like" title="喜欢" name="myfav_001Wt8jA3jSXyi" mid="001Wt8jA3jSXyi"><span>我喜欢</span></strong><strong class="btn_share" title="分享"><span>分享</span></strong><strong class="btn_fav" title="收藏到歌单"><span>收藏</span></strong><strong class="btn_del" title="从列表中删除"><span>删除</span></strong></div></li>', name, author, key); 
+		getSongItemTmpl : function(name, author, nameStr, index) {
+			return String.format('<li class="play_item {2}" index="{3}"><strong class="music_name" title="{0}">{0}</strong><strong class="singer_name" title="{1}">{1}</strong><strong class="play_time"></strong><div class="list_cp"><span class="data"></span><strong class="btn_like" title="喜欢" name="myfav_001Wt8jA3jSXyi" mid="001Wt8jA3jSXyi"><span>我喜欢</span></strong><strong class="btn_share" title="分享"><span>分享</span></strong><strong class="btn_fav" title="收藏到歌单"><span>收藏</span></strong><strong class="btn_del" title="从列表中删除"><span>删除</span></strong></div></li>', name, author, nameStr, index); 
 		}, 
 
 		addPlayList : function() {
@@ -183,7 +212,7 @@ define(function(require, exports, module) {
 				song_item; 
 			for (var i = 0; i < songList.length; ++i) {
 				song_item = songList[i]; 
-				singleTmpl = this.getSongItemTmpl(song_item.name, song_item.author, song_item.key);
+				singleTmpl = this.getSongItemTmpl(song_item.name, song_item.author, this.removeExtNameByKey(song_item.key), i);
 
 				singleListEl.append(singleTmpl); 
 			}
