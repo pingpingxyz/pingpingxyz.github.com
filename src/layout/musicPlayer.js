@@ -30,6 +30,8 @@ define(function(require, exports, module) {
 			
 			this.singleListEl = this.el.find('.single_list>ul'); 
 
+			this.closeListBtn = this.el.find('.close_list');
+			this.songsNumberEl = this.el.find('.open_list>span'); 
 			this.init();
 
 			window.pp = this;
@@ -46,10 +48,22 @@ define(function(require, exports, module) {
 		bindEvents : function() {
 			var self = this; 
 
-			this.foldBtn.bind('click', function(e) {
-
+			this.playBtn.bind('click', function(e) {
 				var etar = $(e.target); 
+				if (etar.hasClass('play')) {
+					etar.removeClass('play'); 
+					etar.addClass('pause'); 
+					self.audioPlayer.pause();
+				} else if (etar.hasClass('pause')) {
+					etar.removeClass('pause'); 
+					etar.addClass('play'); 
+					self.audioPlayer.play();
 
+				}
+			}); 
+
+			this.foldBtn.bind('click', function(e) {
+				var etar = $(e.target); 
 				if (etar.hasClass('fold')) {
 					etar.removeClass('fold'); 
 					etar.addClass('unfold'); 
@@ -63,7 +77,6 @@ define(function(require, exports, module) {
 					self.playerEl.animate({
 						left : -541
 					}, 1000)
-
 				}
 			}); 
 
@@ -73,10 +86,6 @@ define(function(require, exports, module) {
 				} else {
 					self.playListEl.show();
 				}
-			})
-
-			this.playBtn.bind('click', function() {
-				console.log('play');
 			})
 
 			this.playPreBtn.bind('click', function() {
@@ -99,6 +108,9 @@ define(function(require, exports, module) {
 				}
 			})
 
+			this.closeListBtn.bind('click', function() {
+				self.playListEl.hide(); 
+			})
 		}, 
 
 		getSongList : function() {
@@ -148,6 +160,8 @@ define(function(require, exports, module) {
 
 			// console.log(JSON.stringify(this.songList)); 
 			// console.log(JSON.stringify(this.song)); 
+			
+			this.songsNumberEl.html(this.songList.length); 
 			this.addPlayList();
 			this.autoplay();
 		}, 
@@ -225,7 +239,7 @@ define(function(require, exports, module) {
 								'<div class="music_info" id="divsonginfo"><a target="contentFrame" class="album_pic" title=""><img src="./style/images/cover_mine_130.jpg" alt="" ></a><div class="music_info_main"><p class="music_name" title="音乐你的生活"><span>音乐你的生活</span></p><p class="singer_name" title="音乐">音乐</p><p class="play_date" id="ptime"></p><p class="music_op" style="display:none;"><strong class="btn_like_n" title="暂不提供此歌曲服务" onclick="MUSIC.event.cancelBubble();" name="myfav_" mid=""><span>我喜欢</span></strong><strong class="btn_share_n" title="暂不提供此歌曲服务" onclick="MUSIC.event.cancelBubble();"><span>分享</span></strong></p></div></div>',
 								'<div class="bar_op">',
 									'<strong title="上一首( [ )" class="prev_bt" ><span>上一首</span></strong>',
-									'<strong title="播放(P)" class="play_bt" id="btnplay" onclick="g_topPlayer.play();"><span>播放</span></strong>',
+									'<strong title="播放(P)" class="play_bt play" id="btnplay" ><span>播放</span></strong>',
 									'<strong title="下一首( ] )" class="next_bt" ><span>下一首</span></strong>',
 									'<strong title="随机播放" class="unordered_bt" id="btnPlayway" onclick="g_topPlayer.setPlayWay();"><span>随机播放</span></strong>',
 									'<p class="volume" title="音量调节">',

@@ -256,6 +256,18 @@ to{opacity:.5}}
 	overflow-y : scroll;
 }
 
+#clear_list {
+	display: none;
+}
+
+.play_bt.pause {
+	background-position: -293px -88px !important;
+}
+
+.play_bt.pause:hover {
+	background-position: -293px -88px !important;
+}
+
 
 
 
