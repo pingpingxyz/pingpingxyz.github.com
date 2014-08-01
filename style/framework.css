@@ -325,6 +325,48 @@ label b {
 	padding: 1px 3px;
 }
 
+.postCon {
+	float: right;
+	line-height: 1.5;
+	width: 100%;
+	clear: both;
+	padding: 10px 0;
+	font-size: 13px;
+}
+
+.c_b_p_desc {
+	word-wrap: break-word;
+	word-break: break-all;
+	overflow: hidden;
+	line-height: 1.5;
+}
+
+.c_b_p_desc  a{
+	color: #1F7F80;
+}
+
+.postDesc {
+	float: right;
+	width: 100%;
+	clear: both;
+	text-align: right;
+	padding-right: 5px;
+	color: #666;
+	margin-top: 5px;
+	font-size: 12px;
+}
+
+.postDesc a:link, .postDesc a:visited, .postDesc a:active {
+	color: #AA7A53;
+}
+
+.postCon a:link, .postCon a:visited, .postCon a:active {
+	text-decoration: underline;
+}
+
+.article-item.short {
+	height: 109px;
+}
 
 
 

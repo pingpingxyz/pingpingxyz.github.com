@@ -16,9 +16,9 @@ define(function(require, exports, module) {
 					'<div class="block category">',
 					    '<div class="title">文章分类<label for="category" class="iconfont"><i></i><b></b></label></div>',
 					    '<ul>',
-					        '<li><a href="####">墨·Javascript</a></li>',
-					        '<li><a href="####">墨·WEB综合</a></li>',
-					        '<li><a href="####">墨·其他</a></li>',    
+					        '<li><a href="####">幽默的地方</a></li>',
+					        '<li><a href="####">生活的记录</a></li>',
+					        '<li><a href="####">其他</a></li>',    
 					    '</ul>',
 					'</div>',
 

@@ -24,7 +24,38 @@ define(function(require, exports, module) {
 			this.genNavs()
 		},
 
-		genArticleNav : function(data) {
+		genArticleNav2 : function(data) {
+
+			data = {
+				classify : '生活小结',
+				title : '哈哈', 
+				time : '2014-7-30', 
+				url : 'www.baidu.com'
+			}
+			var classify = data.classify, 
+				title = data.title, 
+				time = data.time, 
+				url = data.url;
+
+			var tpl = [
+				'<div class="article-item short">',
+					'<h2>', 
+						'<a class="label">',
+							'{0}',
+							'<i class="label-arrow"></i>',
+						'</a>',
+						'<a class="title">{1}</a>',
+					'</h2>',
+					'<div class="postCon"><div class="c_b_p_desc">摘要: FineUI（专业版）是由三生石上全新打造的基于 jQuery 的专业 ASP.NET 控件库，计划在七月下旬正式发布。选择FineUI（专业版）的四大理由：1.简单：专业版和开源版兼容（v4.x），您现在就可以使用开源版进行开发，等正式版发布时只需替换 DLL 即可。2.极速：专业版基于 jQue...<a href="{3}" class="c_b_p_desc_readmore">阅读全文</a></div></div>',
+					'<div class="clear"></div>',
+					'<div class="postDesc">posted @ {2} by WLin</div>',
+				'</div>'
+			].join(''); 
+
+			$(String.format(tpl, classify, title, time, url)).appendTo(this.articleEl); 
+		}, 
+
+		genArticleNav : function() {
 			var tpl = [
 				'<div class="article-item">',
 					'<h2>', 
@@ -48,9 +79,8 @@ define(function(require, exports, module) {
 		}, 
 
 		genNavs : function() {
-
 			for (var i = 0; i < 5; i++) {
-				this.genArticleNav();
+				this.genArticleNav2();
 			}
 		}
 	}
