@@ -27,7 +27,6 @@ define(function(require, exports, module) {
 			this.getJokesList();
 
 			this.bindEvents();
-			
 		},
 
 		getJokesList : function() {
@@ -56,6 +55,29 @@ define(function(require, exports, module) {
 			    	self.parseLivesList(data.data); 
 			    }
 			}; 
+
+			window.onhashchange = function(){
+				var isroot=((repos.indexOf('github.com')==-1 && repos.indexOf('github.io')==-1)?false:true);
+
+				if(location.hash && location.hash.substr(1,1) != '!'){
+					window.history.replaceState(null, '', (isroot?'':('/'+repos))+'/#!'+path);
+					return;
+				}
+
+				if (document.documentElement) {
+					document.documentElement.scrollLeft = 0;
+					document.documentElement.scrollTop = 0;
+				}
+				if (document.body) {
+					document.body.scrollLeft = 0;
+					document.body.scrollTop = 0;
+				}
+				dis.style.display = 'none';
+				dis.innerHTML = '';
+				path = location.hash.substr(2);
+				if(path == (isroot?'':('/'+repos))+'/'){path = ''; window.history.replaceState(null, '', (isroot?'':('/'+repos))+'/');}
+				main();
+			}
 		}, 
 
 		parseJokesList : function(data) {
@@ -118,25 +140,25 @@ define(function(require, exports, module) {
 
 		bindEvents : function() {
 			var self = this;
-			
-
 			this.articleEl.bind('click', function(e) {
 
 				var jokesMapping = self.jokesMapping; 
 				var etar = $(e.target); 
-
 				var acticleItem = etar.closest('.article-item'); 
 				if (acticleItem.length) {
 					var className = acticleItem[0].className;
 					var key = className.replace(/article-item/g, '').replace(/short/g, '').replace(/\s+/g, ''); 
 					console.log(jokesMapping[key]);
 					self.getOnemdByName(jokesMapping[key].name);
+					self.linkedActicle(key);
 				}
 			})
 		}, 
 
-		getmd : function() {
-
+		linkedActicle : function(key) {
+			var jokesMapping = this.jokesMapping;  
+			var actInfo = jokesMapping[key]; 
+			window.location.href = '/#!/'+actInfo.name;
 		}, 
 
 		genArticleNav2 : function(data) {
@@ -187,7 +209,11 @@ define(function(require, exports, module) {
 
 			$(tpl).appendTo(this.articleEl); 
 		}
+
+
 	}
 
 	module.exports = list; 
 })
+
+
