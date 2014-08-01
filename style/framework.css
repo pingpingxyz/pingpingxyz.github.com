@@ -72,8 +72,9 @@ body {
 	width: 250px;
 	float: right; 
 	height: 300px; 
-	position: relative;
+	position: absolute;
 	top: 64px;
+	right: 0;
 }
 
 

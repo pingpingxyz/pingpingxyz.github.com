@@ -23,6 +23,8 @@ define(function(require, exports, module) {
 
 			this.initCallback(); 
 			this.getJokesList();
+
+			this.bindEvents();
 			
 		},
 
@@ -58,19 +60,37 @@ define(function(require, exports, module) {
 			console.log(JSON.stringify(data)); 
 
 			var jokesList = this.jokesList = [], 
+				jokesMapping = this.jokesMapping = {},
 				dataItem; 
 			for (var i = 0; i < data.length; ++i) {
 				dataItem = data[i]; 
+				var key = this.genKeyByName(dataItem.name); 
 				var o = {
 					classify : '幽默的地方',
 					title : dataItem.name.split('-')[3], 
 					time : this.getActicleTime(dataItem), 
-					url : 'www.baidu.com'
+					url : 'www.baidu.com', 
+					key : key, 
+					name : dataItem.name
 				}
+				jokesMapping[key] = o; 
 				jokesList.push(o); 
 			}
-			console.log(jokesList);
+			// console.log(jokesList);
 			this.genNavs(); 
+		}, 
+
+		getOnemdByName : function(name) {
+			var pre = 'http://pingpingxyz.github.io/'; 
+			var url = pre + '/jokes/'+name; 
+			$.ajax({  
+		        type : "get",  
+		        async: true,  
+		        url : url,
+		        success : function(data){  
+		        	console.log(data);
+		        }
+		    });  
 		}, 
 
 		getActicleTime : function(dataItem) {
@@ -82,6 +102,10 @@ define(function(require, exports, module) {
 			console.log(JSON.stringify(data)); 
 		},
 
+		genKeyByName : function(name) {
+			return name.replace(/\s+/g, '_'); 
+		}, 
+
 		genNavs : function() {
 			var data = this.jokesList; 
 
@@ -90,20 +114,39 @@ define(function(require, exports, module) {
 			}
 		},
 
+		bindEvents : function() {
+			var self = this;
+			
+
+			this.articleEl.bind('click', function(e) {
+
+				var jokesMapping = self.jokesMapping; 
+				var etar = $(e.target); 
+
+				var acticleItem = etar.closest('.article-item'); 
+				if (acticleItem.length) {
+					var className = acticleItem[0].className;
+					var key = className.replace(/article-item/g, '').replace(/short/g, '').replace(/\s+/g, ''); 
+					console.log(jokesMapping[key]);
+					self.getOnemdByName(jokesMapping[key].name);
+				}
+			})
+		}, 
+
+		getmd : function() {
+
+		}, 
+
 		genArticleNav2 : function(data) {
-			data = {
-				classify : '生活小结',
-				title : '哈哈', 
-				time : '2014-7-30', 
-				url : 'www.baidu.com'
-			}
 			var classify = data.classify, 
 				title = data.title, 
 				time = data.time, 
-				url = data.url;
+				url = data.url, 
+				key = data.key; 
 
+			url = 'jokes/2013-04-09-一个新的开始';
 			var tpl = [
-				'<div class="article-item short">',
+				'<div class="article-item short {4}">',
 					'<h2>', 
 						'<a class="label">',
 							'{0}',
@@ -117,7 +160,7 @@ define(function(require, exports, module) {
 				'</div>'
 			].join(''); 
 
-			$(String.format(tpl, classify, title, time, url)).appendTo(this.articleEl); 
+			$(String.format(tpl, classify, title, time, url, key)).appendTo(this.articleEl); 
 		}, 
 
 		genArticleNav : function() {
