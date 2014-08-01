@@ -21,11 +21,76 @@ define(function(require, exports, module) {
 			this.el = $(tpl).appendTo(ct); 
 			this.articleEl = this.el.find('.list-article'); 
 
-			this.genNavs()
+			this.initCallback(); 
+			this.getJokesList();
+			
+		},
+
+		getJokesList : function() {
+			var self = this;
+
+			$.ajax({  
+		        type : "get",  
+		        async: true,  
+		        url : "https://api.github.com/repos/pingpingxyz/pingpingxyz.github.com/contents/jokes?callback=window.blog.getJokesList",  
+		        dataType : "jsonp", 
+		        jsonp: "window.blog.getJokesList", 
+		        success : function(data){  
+		        }
+		    });  
+		}, 
+
+		initCallback : function() {
+			var self = this; 
+
+			window.blog = {
+				getJokesList : function(data) {
+			    	self.parseJokesList(data.data);
+			    }, 
+
+			    getLiveList : function(data) {
+			    	self.parseLivesList(data.data); 
+			    }
+			}; 
+		}, 
+
+		parseJokesList : function(data) {
+			console.log(JSON.stringify(data)); 
+
+			var jokesList = this.jokesList = [], 
+				dataItem; 
+			for (var i = 0; i < data.length; ++i) {
+				dataItem = data[i]; 
+				var o = {
+					classify : '幽默的地方',
+					title : dataItem.name.split('-')[3], 
+					time : this.getActicleTime(dataItem), 
+					url : 'www.baidu.com'
+				}
+				jokesList.push(o); 
+			}
+			console.log(jokesList);
+			this.genNavs(); 
+		}, 
+
+		getActicleTime : function(dataItem) {
+			var timeArr = dataItem.name.split('-'); 
+			return timeArr[0] + timeArr[1] + timeArr[2]; 
+		}, 
+
+		parseLivesList : function(data) {
+			console.log(JSON.stringify(data)); 
+		},
+
+		genNavs : function() {
+			var data = this.jokesList; 
+
+			for (var i = 0; i < data.length; i++) {
+				this.genArticleNav2(data[i]);
+			}
 		},
 
 		genArticleNav2 : function(data) {
-
 			data = {
 				classify : '生活小结',
 				title : '哈哈', 
@@ -76,12 +141,6 @@ define(function(require, exports, module) {
 			].join(''); 
 
 			$(tpl).appendTo(this.articleEl); 
-		}, 
-
-		genNavs : function() {
-			for (var i = 0; i < 5; i++) {
-				this.genArticleNav2();
-			}
 		}
 	}
 
