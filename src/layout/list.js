@@ -58,6 +58,7 @@ define(function(require, exports, module) {
 
 			window.onhashchange = function(){
 				var isroot=((repos.indexOf('github.com')==-1 && repos.indexOf('github.io')==-1)?false:true);
+				var repos = 'pingpingxyz.github.io';	
 
 				if(location.hash && location.hash.substr(1,1) != '!'){
 					window.history.replaceState(null, '', (isroot?'':('/'+repos))+'/#!'+path);
@@ -76,7 +77,6 @@ define(function(require, exports, module) {
 				dis.innerHTML = '';
 				path = location.hash.substr(2);
 				if(path == (isroot?'':('/'+repos))+'/'){path = ''; window.history.replaceState(null, '', (isroot?'':('/'+repos))+'/');}
-				main();
 			}
 		}, 
 
@@ -149,7 +149,7 @@ define(function(require, exports, module) {
 					var className = acticleItem[0].className;
 					var key = className.replace(/article-item/g, '').replace(/short/g, '').replace(/\s+/g, ''); 
 					console.log(jokesMapping[key]);
-					self.getOnemdByName(jokesMapping[key].name);
+					// self.getOnemdByName(jokesMapping[key].name);
 					self.linkedActicle(key);
 				}
 			})
