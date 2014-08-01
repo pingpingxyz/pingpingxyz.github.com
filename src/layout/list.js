@@ -81,8 +81,7 @@ define(function(require, exports, module) {
 		}, 
 
 		getOnemdByName : function(name) {
-			var pre = 'http://pingpingxyz.github.io/'; 
-			var url = pre + '/jokes/'+name; 
+			var url = './jokes/'+name; 
 			$.ajax({  
 		        type : "get",  
 		        async: true,  
