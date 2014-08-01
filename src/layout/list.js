@@ -1,4 +1,6 @@
 
+var converter = new Showdown.converter();
+
 define(function(require, exports, module) {
 
 	function list(options) {
@@ -87,6 +89,7 @@ define(function(require, exports, module) {
 		        async: true,  
 		        url : url,
 		        success : function(data){  
+		        	converter.makeHtml(data);
 		        	console.log(data);
 		        }
 		    });  
