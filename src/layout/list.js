@@ -57,14 +57,13 @@ define(function(require, exports, module) {
 			}; 
 
 			window.onhashchange = function(){
-				var isroot=((repos.indexOf('github.com')==-1 && repos.indexOf('github.io')==-1)?false:true);
-				var repos = 'pingpingxyz.github.io';	
 
-				if(location.hash && location.hash.substr(1,1) != '!'){
-					window.history.replaceState(null, '', (isroot?'':('/'+repos))+'/#!'+path);
-					return;
+				var hash = window.location.hash; 
+				if ( !hash || hash.substr(0, 2) !== '#!' ) {
+					return; 
 				}
 
+ 				
 				if (document.documentElement) {
 					document.documentElement.scrollLeft = 0;
 					document.documentElement.scrollTop = 0;
@@ -73,12 +72,15 @@ define(function(require, exports, module) {
 					document.body.scrollLeft = 0;
 					document.body.scrollTop = 0;
 				}
-				dis.style.display = 'none';
-				dis.innerHTML = '';
-				path = location.hash.substr(2);
-				if(path == (isroot?'':('/'+repos))+'/'){path = ''; window.history.replaceState(null, '', (isroot?'':('/'+repos))+'/');}
+				var noteName = hash.substring(3); 
+				self.changeActicle(noteName); 
 			}
 		}, 
+
+		changeActicle : function(noteName) {
+			this.getOnemdByName(noteName);
+		}, 
+
 
 		parseJokesList : function(data) {
 			console.log(JSON.stringify(data)); 
@@ -105,14 +107,16 @@ define(function(require, exports, module) {
 		}, 
 
 		getOnemdByName : function(name) {
+			var self = this;
+
 			var url = './jokes/'+name; 
 			$.ajax({  
 		        type : "get",  
 		        async: true,  
 		        url : url,
 		        success : function(data){  
-		        	converter.makeHtml(data);
-		        	console.log(data);
+		        	var content = converter.makeHtml(data);
+		        	self.articleEl.html(content);
 		        }
 		    });  
 		}, 
