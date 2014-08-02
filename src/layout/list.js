@@ -162,6 +162,9 @@ define(function(require, exports, module) {
 
 				var jokesMapping = self.jokesMapping; 
 				var etar = $(e.target); 
+
+				if ( !etar.hasClass('title') ) return;
+				
 				var acticleItem = etar.closest('.article-item'); 
 				if (acticleItem.length) {
 					var className = acticleItem[0].className;
@@ -186,7 +189,6 @@ define(function(require, exports, module) {
 				url = data.url, 
 				key = data.key; 
 
-			url = 'jokes/2013-04-09-一个新的开始';
 			var tpl = [
 				'<div class="article-item short {4}">',
 					'<h2>', 

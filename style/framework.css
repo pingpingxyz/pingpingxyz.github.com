@@ -366,7 +366,11 @@ label b {
 }
 
 .article-item.short {
-	height: 109px;
+	height: 41px;
+}
+
+.postCon {
+	display: none;
 }
 
 .one-acticle {
@@ -374,6 +378,9 @@ label b {
 	padding: 30px 55px;
 }
 
+.article-item .title {
+	cursor : pointer;
+}
 
 
 
