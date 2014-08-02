@@ -14,7 +14,7 @@ define(function(require, exports, module) {
 			var tpl = [
 				'<div class="container">', 
 					'<div class="iconfont">',
-						'<a href="www.baidu.com">博客家园</a>',
+						'<a href="www.baidu.com">萍萍家园</a>',
 					'</div>', 
 					'<ul class="nav">',	
 						'<li class="page-item current_page_item">文章列表</li>', 
