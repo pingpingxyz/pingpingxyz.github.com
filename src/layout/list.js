@@ -73,12 +73,20 @@ define(function(require, exports, module) {
 					document.body.scrollTop = 0;
 				}
 				var noteName = hash.substring(3); 
-				self.changeActicle(noteName); 
+
+				self.getOnemdByName(noteName); 
 			}
 		}, 
 
-		changeActicle : function(noteName) {
-			this.getOnemdByName(noteName);
+		showOneActicle : function(data) {
+			this.articleEl.empty();
+
+			var content = converter.makeHtml(data);
+			var tpl = [
+				'<div class="one-acticle"></div>'
+			].join('');
+			var oneActicleEl = $(tpl).appendTo(this.articleEl); 
+			oneActicleEl.html(content);
 		}, 
 
 
@@ -115,8 +123,7 @@ define(function(require, exports, module) {
 		        async: true,  
 		        url : url,
 		        success : function(data){  
-		        	var content = converter.makeHtml(data);
-		        	self.articleEl.html(content);
+		        	self.showOneActicle(data);
 		        }
 		    });  
 		}, 
