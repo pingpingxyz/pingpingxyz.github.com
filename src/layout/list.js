@@ -60,7 +60,8 @@ define(function(require, exports, module) {
 
 				var hash = window.location.hash; 
 				if ( !hash || hash.substr(0, 2) !== '#!' ) {
-					return; 
+					self.genNavs(); 
+					return ;
 				}
 
  				
@@ -79,7 +80,8 @@ define(function(require, exports, module) {
 		}, 
 
 		showOneActicle : function(data) {
-			this.articleEl.empty();
+			// this.articleEl.empty();
+			this.resetActicle();
 
 			var content = converter.makeHtml(data);
 			var tpl = [
@@ -142,12 +144,17 @@ define(function(require, exports, module) {
 		}, 
 
 		genNavs : function() {
-			var data = this.jokesList; 
+			this.resetActicle();
 
+			var data = this.jokesList; 
 			for (var i = 0; i < data.length; i++) {
 				this.genArticleNav2(data[i]);
 			}
 		},
+
+		resetActicle : function() {
+			this.articleEl.empty();
+		}, 
 
 		bindEvents : function() {
 			var self = this;
