@@ -93,7 +93,6 @@ define(function(require, exports, module) {
 
 
 		parseJokesList : function(data) {
-			console.log(JSON.stringify(data)); 
 
 			var jokesList = this.jokesList = [], 
 				jokesMapping = this.jokesMapping = {},
@@ -170,7 +169,7 @@ define(function(require, exports, module) {
 				if (acticleItem.length) {
 					var className = acticleItem[0].className;
 					var key = className.replace(/article-item/g, '').replace(/short/g, '').replace(/\s+/g, ''); 
-					console.log(jokesMapping[key]);
+					// console.log(jokesMapping[key]);
 					// self.getOnemdByName(jokesMapping[key].name);
 					self.linkedActicle(key);
 				}
