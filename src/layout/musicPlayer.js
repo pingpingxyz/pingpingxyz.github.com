@@ -122,7 +122,6 @@ define(function(require, exports, module) {
 		        dataType : "jsonp", 
 		        jsonp: "window.music.getSongList", 
 		        success : function(data){  
-		        	console.log(data);
 		        }
 		    });  
 		    
@@ -175,9 +174,14 @@ define(function(require, exports, module) {
 		},
 
 		autoplay : function() {
-			this.currentSongIndex = 0; 
+			this.currentSongIndex = this.randomIndex(); 
 			this.playSongByCurrentIndex(); 
 		}, 
+
+		randomIndex : function() {
+			var len = this.songList.length; 
+			return parseInt(Math.random() * len) % len;
+		}, 	
 
 		playSongByKey : function(key) {
 
