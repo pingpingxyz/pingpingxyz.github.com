@@ -98,6 +98,7 @@ define(function(require, exports, module) {
 			var jokesList = this.jokesList = [], 
 				jokesMapping = this.jokesMapping = {},
 				dataItem; 
+
 			for (var i = 0; i < data.length; ++i) {
 				dataItem = data[i]; 
 				var key = this.genKeyByName(dataItem.name); 
@@ -105,7 +106,7 @@ define(function(require, exports, module) {
 					classify : '幽默的地方',
 					title : dataItem.name.split('-')[3], 
 					time : this.getActicleTime(dataItem), 
-					url : 'www.baidu.com', 
+					url : './jokes/' + dataItem.name,
 					key : key, 
 					name : dataItem.name
 				}
@@ -164,7 +165,7 @@ define(function(require, exports, module) {
 				var etar = $(e.target); 
 
 				if ( !etar.hasClass('title') ) return;
-				
+
 				var acticleItem = etar.closest('.article-item'); 
 				if (acticleItem.length) {
 					var className = acticleItem[0].className;
